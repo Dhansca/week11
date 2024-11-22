@@ -13,7 +13,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-west-2"
+  region = "us-east-1"
 }
 
 resource "random_pet" "sg" {}
@@ -32,6 +32,18 @@ data "aws_ami" "ubuntu" {
   }
 
   owners = ["099720109477"] # Canonical
+}
+
+resource "aws_instance" "FirstGHAEC2" {
+  ami                    = "ami-0596d807260f25fc1"
+  instance_type          = "t2.micro"
+#  key_name               = aws_key_pair.week4KP.key_name
+#  vpc_security_group_ids = [aws_security_group.ACSFirstSG.id]
+
+   tags = {
+     name = "GHACS730"
+     env  = "Test"
+  }
 }
 
 
